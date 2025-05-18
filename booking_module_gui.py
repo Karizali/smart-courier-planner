@@ -3,10 +3,19 @@ from tkinter import messagebox
 from tkinter import ttk
 import psycopg2
 import random
+from fpdf import FPDF
+import smtplib
+from email.message import EmailMessage
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def generateId(min=0,max=100):
     a = random.randint(min,max)
     return a
+
+
 def Booking_Module_GUI():
     
     conn= psycopg2.connect(host="localhost", dbname="postgres" ,user="postgres", password="12345", port=5432)
@@ -44,48 +53,106 @@ def Booking_Module_GUI():
     courier_type_var = tk.StringVar()
 
 
-    def Submit():
-        # if email_var.get():
-        #     messagebox.showinfo("Invalid Email", "Please Enter correct email")
-        #     return
-        # if contact_var.get() =="" or not contact_var.get().isdigit() or len(contact_var.get()) < 2:
-        #     messagebox.showerror("Invalid Contact Number", "Please Enter correct Contact Number")
-        #     return
-        # if destination_address_var.get().count("block")==0 and destination_address_var.get().count("sector")==0 or len(destination_address_var.get()) < 10:
-        #     messagebox.showerror("Invalid Destination Address", "Please Enter Complete Destination Address with house no. , city name, area name , sector/block")
-        #     return
-        # else:
-        #     messagebox.showinfo("Courier Booked", f"Courier booked for {destination_address_txt.get()}")
-        #     cur.execute(f"""INSERT INTO couriers (
-        #         id ,
-        #         name ,
-        #         contact_num ,
-        #         destination_address,
-        #         branch_address
-        #         ) VALUES 
-        #         (1, 'Ali', 1234567890, 'House No. 123, Sector 5, Lahore', 'Branch No. 456, Block A, Lahore')
-        #         """)
-        
+    def validation():
+        if email_var.get():
+            messagebox.showinfo("Invalid Email", "Please Enter correct email")
+            return False
+        if contact_var.get() =="" or not contact_var.get().isdigit() or len(contact_var.get()) < 2:
+            messagebox.showerror("Invalid Contact Number", "Please Enter correct Contact Number")
+            return False
+        if destination_address_var.get().count("block")==0 and destination_address_var.get().count("sector")==0 or len(destination_address_var.get()) < 10:
+            messagebox.showerror("Invalid Destination Address", "Please Enter Complete Destination Address with house no. , city name, area name , sector/block")
+            return False
+        else:
+            messagebox.showinfo("Courier Booked", f"Courier booked for {destination_address_txt.get()}")
+
+    def save_to_db():
+
+        id_=generateId(1000,9999)
         
         cur.execute(f"""INSERT INTO couriers (
-                id ,
-                item ,
-                contact_num ,
-                destination_address,
-                branch_address,
-                customer_name,
-                email,
-                courier_type,
-                city,
-                courier_route,
-                courier_weight
-                ) VALUES 
-                ({generateId(1000,9999)}, '{item_name_var.get()}', {contact_var.get()} , 
-                '{destination_address_var.get()}',
-                '{branch_address_var.get()}', '{customer_name_var.get()}', '{email_var.get()}', 
-                '{courier_type_var.get()}', '{city_var.get()}', '{courier_route_var.get()}', 
-                '{courier_weight_var.get()}')    
-                """)
+        id ,
+        item ,
+        contact_num ,
+        destination_address,
+        branch_address,
+        customer_name,
+        email,
+        courier_type,
+        city,
+        courier_route,
+        courier_weight
+        ) VALUES 
+        ({id_}, '{item_name_var.get()}', {contact_var.get()} , 
+        '{destination_address_var.get()}',
+        '{branch_address_var.get()}', '{customer_name_var.get()}', '{email_var.get()}', 
+        '{courier_type_var.get()}', '{city_var.get()}', '{courier_route_var.get()}', 
+        '{courier_weight_var.get()}')    
+        """)
+        return id_
+
+    def send_invoice_email(to_email, pdf_file_path):
+        sender_email = os.getenv("SENDER_EMAIL")
+        sender_password = os.getenv("SENDER_PASSWORD") 
+
+        msg = EmailMessage()
+        msg['Subject'] = "Your Courier Invoice"
+        msg['From'] = sender_email
+        msg['To'] = to_email
+        msg.set_content("Thank you for using our courier service. Please find your invoice attached.")
+
+        # Read and attach PDF
+        with open(pdf_file_path, 'rb') as f:
+            file_data = f.read()
+            file_name = os.path.basename(pdf_file_path)
+
+        msg.add_attachment(file_data, maintype='application', subtype='pdf', filename=file_name)
+
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+            smtp.login(sender_email, sender_password)
+            smtp.send_message(msg)
+
+    def generate_invoice_pdf(invoice_id):
+        data = {
+        "Invoice ID": invoice_id,
+        "Item": item_name_var.get(),
+        "Contact Number": contact_var.get(),
+        "Destination": destination_address_var.get(),
+        "Branch": branch_address_var.get(),
+        "Customer Name": customer_name_var.get(),
+        "Email": email_var.get(),
+        "Courier Type": courier_type_var.get(),
+        "City": city_var.get(),
+        "Courier Route": courier_route_var.get(),
+        "Courier Weight": courier_weight_var.get()
+        }
+        pdf = FPDF()
+        pdf.add_page()
+        pdf.set_font("Arial", size=12)
+    
+        pdf.cell(200, 10, txt="Courier Invoice", ln=True, align='C')
+        pdf.ln(10)
+    
+        for key, value in data.items():
+            pdf.cell(200, 10, txt=f"{key}: {value}", ln=True)
+    
+        file_name = f"Invoice_{invoice_id}.pdf"
+        pdf.output(file_name)
+        messagebox.showinfo("Success", f"Data saved and invoice generated: {file_name}")
+        return file_name
+
+    
+
+    def Submit():
+        
+        # isValidation=validation()        
+        # if not isValidation:
+        #     return
+        
+        invoice_id=save_to_db()
+        pdf_path=generate_invoice_pdf(invoice_id)
+        print(f"Invoice generated: {pdf_path}")
+        send_invoice_email(email_var.get(), pdf_path)
 
 
     l0 = tk.Label(root, text="Courier Details", font="arial 20 bold", bg="lightblue")

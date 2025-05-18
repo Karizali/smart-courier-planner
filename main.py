@@ -1,0 +1,3 @@
+from booking_module_gui import Booking_Module_GUI
+
+Booking_Module_GUI()

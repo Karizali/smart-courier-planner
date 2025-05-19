@@ -8,6 +8,7 @@ import smtplib
 from email.message import EmailMessage
 import os
 from dotenv import load_dotenv
+import requests
 
 load_dotenv()
 
@@ -17,6 +18,8 @@ def generateId(min=0,max=100):
 
 
 def Booking_Module_GUI():
+    
+    api_key = os.getenv("API_KEY")
     
     conn= psycopg2.connect(host="localhost", dbname="postgres" ,user="postgres", password="12345", port=5432)
     cur= conn.cursor()
@@ -140,19 +143,57 @@ def Booking_Module_GUI():
         pdf.output(file_name)
         messagebox.showinfo("Success", f"Data saved and invoice generated: {file_name}")
         return file_name
-
     
+    def save_latitude_longitude(id):
+        destination_address = destination_address_var.get().split(",",1)[1]
+        branch_address = branch_address_var.get().split(",",1)[1]
+        
+        url = f"https://graphhopper.com/api/1/geocode?q={destination_address}&locale=pk&key={api_key}"
+        response = requests.get(url)
+        destination_address_lat=response.json()["hits"][0]["point"]['lat']
+        destination_address_lng=response.json()["hits"][0]["point"]['lng']
+        url = f"https://graphhopper.com/api/1/geocode?q={branch_address}&locale=pk&key={api_key}"
+        response = requests.get(url)
+        branch_address_lat=response.json()["hits"][0]["point"]['lat']
+        branch_address_lng=response.json()["hits"][0]["point"]['lng']
+        cur.execute("""CREATE TABLE IF NOT EXISTS lat_lng (
+            id INT PRIMARY KEY,
+            des_lat VARCHAR(255),
+            des_lng VARCHAR(255),
+            br_lat VARCHAR(255),
+            br_lng VARCHAR(255)
+            )""")
+        cur.execute(f"""INSERT INTO lat_lng (
+            id ,
+            des_lat,
+            des_lng,
+            br_lat,
+            br_lng
+            ) VALUES 
+            ({id}, '{destination_address_lat}', 
+            '{destination_address_lng}',
+            '{branch_address_lat}', '{branch_address_lng}'
+            )    
+            """)
+        
+        
 
     def Submit():
         
         # isValidation=validation()        
         # if not isValidation:
         #     return
+            
+        id=save_to_db()
         
-        invoice_id=save_to_db()
-        pdf_path=generate_invoice_pdf(invoice_id)
-        print(f"Invoice generated: {pdf_path}")
-        send_invoice_email(email_var.get(), pdf_path)
+        save_latitude_longitude(id)
+
+        
+        # pdf_path=generate_invoice_pdf(id)
+        
+        # print(f"Invoice generated: {pdf_path}")
+        
+        # send_invoice_email(email_var.get(), pdf_path)
 
 
     l0 = tk.Label(root, text="Courier Details", font="arial 20 bold", bg="lightblue")

@@ -1,0 +1,229 @@
+Source,Destination,Special Service,1-5 kg,5-10 kg,10-20 kg,20-50 kg,50+ kg
+Clifton,DHA,Standard,6,8,12,24,36
+Clifton,DHA,Sentimental,4.8,6.4,9.6,19.2,28.8
+Clifton,DHA,Business,3,4,6,12,18
+DHA,Clifton,Standard,6,8,12,24,36
+DHA,Clifton,Sentimental,4.8,6.4,9.6,19.2,28.8
+DHA,Clifton,Business,3,4,6,12,18
+Clifton,Gulshan-e-Iqbal,Standard,7,9,13,26,39
+Clifton,Gulshan-e-Iqbal,Sentimental,5.6,7.2,10.4,20.8,31.2
+Clifton,Gulshan-e-Iqbal,Business,3.5,4.5,6.5,13,19.5
+Gulshan-e-Iqbal,Clifton,Standard,7,9,13,26,39
+Gulshan-e-Iqbal,Clifton,Sentimental,5.6,7.2,10.4,20.8,31.2
+Gulshan-e-Iqbal,Clifton,Business,3.5,4.5,6.5,13,19.5
+Clifton,North Nazimabad,Standard,8,10,14,28,42
+Clifton,North Nazimabad,Sentimental,6.4,8,11.2,22.4,33.6
+Clifton,North Nazimabad,Business,4,5,7,14,21
+North Nazimabad,Clifton,Standard,8,10,14,28,42
+North Nazimabad,Clifton,Sentimental,6.4,8,11.2,22.4,33.6
+North Nazimabad,Clifton,Business,4,5,7,14,21
+Clifton,Saddar,Standard,5,7,10,20,30
+Clifton,Saddar,Sentimental,4,5.6,8,16,24
+Clifton,Saddar,Business,2.5,3.5,5,10,15
+Saddar,Clifton,Standard,5,7,10,20,30
+Saddar,Clifton,Sentimental,4,5.6,8,16,24
+Saddar,Clifton,Business,2.5,3.5,5,10,15
+DHA,Gulshan-e-Iqbal,Standard,9,11,15,30,45
+DHA,Gulshan-e-Iqbal,Sentimental,7.2,8.8,12,24,36
+DHA,Gulshan-e-Iqbal,Business,4.5,5.5,7.5,15,22.5
+Gulshan-e-Iqbal,DHA,Standard,9,11,15,30,45
+Gulshan-e-Iqbal,DHA,Sentimental,7.2,8.8,12,24,36
+Gulshan-e-Iqbal,DHA,Business,4.5,5.5,7.5,15,22.5
+DHA,North Nazimabad,Standard,10,12,16,32,48
+DHA,North Nazimabad,Sentimental,8,9.6,12.8,25.6,38.4
+DHA,North Nazimabad,Business,5,6,8,16,24
+North Nazimabad,DHA,Standard,10,12,16,32,48
+North Nazimabad,DHA,Sentimental,8,9.6,12.8,25.6,38.4
+North Nazimabad,DHA,Business,5,6,8,16,24
+DHA,Saddar,Standard,11,13,17,34,51
+DHA,Saddar,Sentimental,8.8,10.4,13.6,27.2,40.8
+DHA,Saddar,Business,5.5,6.5,8.5,17,25.5
+Saddar,DHA,Standard,11,13,17,34,51
+Saddar,DHA,Sentimental,8.8,10.4,13.6,27.2,40.8
+Saddar,DHA,Business,5.5,6.5,8.5,17,25.5
+Gulshan-e-Iqbal,North Nazimabad,Standard,8,10,14,28,42
+Gulshan-e-Iqbal,North Nazimabad,Sentimental,6.4,8,11.2,22.4,33.6
+Gulshan-e-Iqbal,North Nazimabad,Business,4,5,7,14,21
+North Nazimabad,Gulshan-e-Iqbal,Standard,8,10,14,28,42
+North Nazimabad,Gulshan-e-Iqbal,Sentimental,6.4,8,11.2,22.4,33.6
+North Nazimabad,Gulshan-e-Iqbal,Business,4,5,7,14,21
+Gulshan-e-Iqbal,Saddar,Standard,6,8,12,24,36
+Gulshan-e-Iqbal,Saddar,Sentimental,4.8,6.4,9.6,19.2,28.8
+Gulshan-e-Iqbal,Saddar,Business,3,4,6,12,18
+Saddar,Gulshan-e-Iqbal,Standard,6,8,12,24,36
+Saddar,Gulshan-e-Iqbal,Sentimental,4.8,6.4,9.6,19.2,28.8
+Saddar,Gulshan-e-Iqbal,Business,3,4,6,12,18
+North Nazimabad,Saddar,Standard,7,9,13,26,39
+North Nazimabad,Saddar,Sentimental,5.6,7.2,10.4,20.8,31.2
+North Nazimabad,Saddar,Business,3.5,4.5,6.5,13,19.5
+Saddar,North Nazimabad,Standard,7,9,13,26,39
+Saddar,North Nazimabad,Sentimental,5.6,7.2,10.4,20.8,31.2
+Saddar,North Nazimabad,Business,3.5,4.5,6.5,13,19.5
+Gulberg,Johar Town,Standard,7,10.5,14,17.5,21
+Gulberg,Johar Town,Sentimental,8,12,16,20,24
+Gulberg,Johar Town,Business,4,6,8,10,12
+Gulberg,Model Town,Standard,12,18,24,30,36
+Gulberg,Model Town,Sentimental,9,13.5,18,22.5,27
+Gulberg,Model Town,Business,3,4.5,6,7.5,9
+Gulberg,DHA Lahore,Standard,7,10.5,14,17.5,21
+Gulberg,DHA Lahore,Sentimental,7,10.5,14,17.5,21
+Gulberg,DHA Lahore,Business,4,6,8,10,12
+Gulberg,Bahria Town,Standard,12,18,24,30,36
+Gulberg,Bahria Town,Sentimental,5,7.5,10,12.5,15
+Gulberg,Bahria Town,Business,3,4.5,6,7.5,9
+Gulberg,Wapda Town,Standard,6,9,12,15,18
+Gulberg,Wapda Town,Sentimental,10,15,20,25,30
+Gulberg,Wapda Town,Business,6,9,12,15,18
+Gulberg,Cantt,Standard,6,9,12,15,18
+Gulberg,Cantt,Sentimental,9,13.5,18,22.5,27
+Gulberg,Cantt,Business,4,6,8,10,12
+Gulberg,Faisal Town,Standard,6,9,12,15,18
+Gulberg,Faisal Town,Sentimental,5,7.5,10,12.5,15
+Gulberg,Faisal Town,Business,5,7.5,10,12.5,15
+Johar Town,Gulberg,Standard,8,12,16,20,24
+Johar Town,Gulberg,Sentimental,10,15,20,25,30
+Johar Town,Gulberg,Business,7,10.5,14,17.5,21
+Johar Town,Model Town,Standard,7,10.5,14,17.5,21
+Johar Town,Model Town,Sentimental,6,9,12,15,18
+Johar Town,Model Town,Business,7,10.5,14,17.5,21
+Johar Town,DHA Lahore,Standard,7,10.5,14,17.5,21
+Johar Town,DHA Lahore,Sentimental,5,7.5,10,12.5,15
+Johar Town,DHA Lahore,Business,5,7.5,10,12.5,15
+Johar Town,Bahria Town,Standard,10,15,20,25,30
+Johar Town,Bahria Town,Sentimental,9,13.5,18,22.5,27
+Johar Town,Bahria Town,Business,3,4.5,6,7.5,9
+Johar Town,Wapda Town,Standard,8,12,16,20,24
+Johar Town,Wapda Town,Sentimental,6,9,12,15,18
+Johar Town,Wapda Town,Business,7,10.5,14,17.5,21
+Johar Town,Cantt,Standard,9,13.5,18,22.5,27
+Johar Town,Cantt,Sentimental,8,12,16,20,24
+Johar Town,Cantt,Business,7,10.5,14,17.5,21
+Johar Town,Faisal Town,Standard,12,18,24,30,36
+Johar Town,Faisal Town,Sentimental,10,15,20,25,30
+Johar Town,Faisal Town,Business,7,10.5,14,17.5,21
+Model Town,Gulberg,Standard,7,10.5,14,17.5,21
+Model Town,Gulberg,Sentimental,7,10.5,14,17.5,21
+Model Town,Gulberg,Business,3,4.5,6,7.5,9
+Model Town,Johar Town,Standard,8,12,16,20,24
+Model Town,Johar Town,Sentimental,8,12,16,20,24
+Model Town,Johar Town,Business,5,7.5,10,12.5,15
+Model Town,DHA Lahore,Standard,8,12,16,20,24
+Model Town,DHA Lahore,Sentimental,8,12,16,20,24
+Model Town,DHA Lahore,Business,6,9,12,15,18
+Model Town,Bahria Town,Standard,8,12,16,20,24
+Model Town,Bahria Town,Sentimental,7,10.5,14,17.5,21
+Model Town,Bahria Town,Business,4,6,8,10,12
+Model Town,Wapda Town,Standard,10,15,20,25,30
+Model Town,Wapda Town,Sentimental,8,12,16,20,24
+Model Town,Wapda Town,Business,6,9,12,15,18
+Model Town,Cantt,Standard,12,18,24,30,36
+Model Town,Cantt,Sentimental,6,9,12,15,18
+Model Town,Cantt,Business,3,4.5,6,7.5,9
+Model Town,Faisal Town,Standard,8,12,16,20,24
+Model Town,Faisal Town,Sentimental,10,15,20,25,30
+Model Town,Faisal Town,Business,5,7.5,10,12.5,15
+DHA Lahore,Gulberg,Standard,8,12,16,20,24
+DHA Lahore,Gulberg,Sentimental,8,12,16,20,24
+DHA Lahore,Gulberg,Business,4,6,8,10,12
+DHA Lahore,Johar Town,Standard,11,16.5,22,27.5,33
+DHA Lahore,Johar Town,Sentimental,6,9,12,15,18
+DHA Lahore,Johar Town,Business,5,7.5,10,12.5,15
+DHA Lahore,Model Town,Standard,7,10.5,14,17.5,21
+DHA Lahore,Model Town,Sentimental,9,13.5,18,22.5,27
+DHA Lahore,Model Town,Business,3,4.5,6,7.5,9
+DHA Lahore,Bahria Town,Standard,11,16.5,22,27.5,33
+DHA Lahore,Bahria Town,Sentimental,8,12,16,20,24
+DHA Lahore,Bahria Town,Business,4,6,8,10,12
+DHA Lahore,Wapda Town,Standard,10,15,20,25,30
+DHA Lahore,Wapda Town,Sentimental,6,9,12,15,18
+DHA Lahore,Wapda Town,Business,3,4.5,6,7.5,9
+DHA Lahore,Cantt,Standard,11,16.5,22,27.5,33
+DHA Lahore,Cantt,Sentimental,5,7.5,10,12.5,15
+DHA Lahore,Cantt,Business,6,9,12,15,18
+DHA Lahore,Faisal Town,Standard,6,9,12,15,18
+DHA Lahore,Faisal Town,Sentimental,9,13.5,18,22.5,27
+DHA Lahore,Faisal Town,Business,5,7.5,10,12.5,15
+Bahria Town,Gulberg,Standard,11,16.5,22,27.5,33
+Bahria Town,Gulberg,Sentimental,8,12,16,20,24
+Bahria Town,Gulberg,Business,3,4.5,6,7.5,9
+Bahria Town,Johar Town,Standard,11,16.5,22,27.5,33
+Bahria Town,Johar Town,Sentimental,10,15,20,25,30
+Bahria Town,Johar Town,Business,6,9,12,15,18
+Bahria Town,Model Town,Standard,8,12,16,20,24
+Bahria Town,Model Town,Sentimental,5,7.5,10,12.5,15
+Bahria Town,Model Town,Business,4,6,8,10,12
+Bahria Town,DHA Lahore,Standard,12,18,24,30,36
+Bahria Town,DHA Lahore,Sentimental,10,15,20,25,30
+Bahria Town,DHA Lahore,Business,5,7.5,10,12.5,15
+Bahria Town,Wapda Town,Standard,11,16.5,22,27.5,33
+Bahria Town,Wapda Town,Sentimental,5,7.5,10,12.5,15
+Bahria Town,Wapda Town,Business,6,9,12,15,18
+Bahria Town,Cantt,Standard,7,10.5,14,17.5,21
+Bahria Town,Cantt,Sentimental,10,15,20,25,30
+Bahria Town,Cantt,Business,5,7.5,10,12.5,15
+Bahria Town,Faisal Town,Standard,6,9,12,15,18
+Bahria Town,Faisal Town,Sentimental,9,13.5,18,22.5,27
+Bahria Town,Faisal Town,Business,6,9,12,15,18
+Wapda Town,Gulberg,Standard,12,18,24,30,36
+Wapda Town,Gulberg,Sentimental,5,7.5,10,12.5,15
+Wapda Town,Gulberg,Business,5,7.5,10,12.5,15
+Wapda Town,Johar Town,Standard,7,10.5,14,17.5,21
+Wapda Town,Johar Town,Sentimental,7,10.5,14,17.5,21
+Wapda Town,Johar Town,Business,7,10.5,14,17.5,21
+Wapda Town,Model Town,Standard,8,12,16,20,24
+Wapda Town,Model Town,Sentimental,6,9,12,15,18
+Wapda Town,Model Town,Business,6,9,12,15,18
+Wapda Town,DHA Lahore,Standard,12,18,24,30,36
+Wapda Town,DHA Lahore,Sentimental,7,10.5,14,17.5,21
+Wapda Town,DHA Lahore,Business,3,4.5,6,7.5,9
+Wapda Town,Bahria Town,Standard,12,18,24,30,36
+Wapda Town,Bahria Town,Sentimental,10,15,20,25,30
+Wapda Town,Bahria Town,Business,6,9,12,15,18
+Wapda Town,Cantt,Standard,10,15,20,25,30
+Wapda Town,Cantt,Sentimental,10,15,20,25,30
+Wapda Town,Cantt,Business,4,6,8,10,12
+Wapda Town,Faisal Town,Standard,11,16.5,22,27.5,33
+Wapda Town,Faisal Town,Sentimental,9,13.5,18,22.5,27
+Wapda Town,Faisal Town,Business,6,9,12,15,18
+Cantt,Gulberg,Standard,7,10.5,14,17.5,21
+Cantt,Gulberg,Sentimental,9,13.5,18,22.5,27
+Cantt,Gulberg,Business,7,10.5,14,17.5,21
+Cantt,Johar Town,Standard,9,13.5,18,22.5,27
+Cantt,Johar Town,Sentimental,8,12,16,20,24
+Cantt,Johar Town,Business,4,6,8,10,12
+Cantt,Model Town,Standard,7,10.5,14,17.5,21
+Cantt,Model Town,Sentimental,7,10.5,14,17.5,21
+Cantt,Model Town,Business,5,7.5,10,12.5,15
+Cantt,DHA Lahore,Standard,10,15,20,25,30
+Cantt,DHA Lahore,Sentimental,7,10.5,14,17.5,21
+Cantt,DHA Lahore,Business,3,4.5,6,7.5,9
+Cantt,Bahria Town,Standard,6,9,12,15,18
+Cantt,Bahria Town,Sentimental,5,7.5,10,12.5,15
+Cantt,Bahria Town,Business,5,7.5,10,12.5,15
+Cantt,Wapda Town,Standard,10,15,20,25,30
+Cantt,Wapda Town,Sentimental,10,15,20,25,30
+Cantt,Wapda Town,Business,6,9,12,15,18
+Cantt,Faisal Town,Standard,10,15,20,25,30
+Cantt,Faisal Town,Sentimental,8,12,16,20,24
+Cantt,Faisal Town,Business,5,7.5,10,12.5,15
+Faisal Town,Gulberg,Standard,10,15,20,25,30
+Faisal Town,Gulberg,Sentimental,8,12,16,20,24
+Faisal Town,Gulberg,Business,5,7.5,10,12.5,15
+Faisal Town,Johar Town,Standard,8,12,16,20,24
+Faisal Town,Johar Town,Sentimental,7,10.5,14,17.5,21
+Faisal Town,Johar Town,Business,6,9,12,15,18
+Faisal Town,Model Town,Standard,12,18,24,30,36
+Faisal Town,Model Town,Sentimental,10,15,20,25,30
+Faisal Town,Model Town,Business,5,7.5,10,12.5,15
+Faisal Town,DHA Lahore,Standard,6,9,12,15,18
+Faisal Town,DHA Lahore,Sentimental,8,12,16,20,24
+Faisal Town,DHA Lahore,Business,5,7.5,10,12.5,15
+Faisal Town,Bahria Town,Standard,12,18,24,30,36
+Faisal Town,Bahria Town,Sentimental,8,12,16,20,24
+Faisal Town,Bahria Town,Business,6,9,12,15,18
+Faisal Town,Wapda Town,Standard,12,18,24,30,36
+Faisal Town,Wapda Town,Sentimental,10,15,20,25,30
+Faisal Town,Wapda Town,Business,5,7.5,10,12.5,15
+Faisal Town,Cantt,Standard,9,13.5,18,22.5,27
+Faisal Town,Cantt,Sentimental,8,12,16,20,24
+Faisal Town,Cantt,Business,5,7.5,10,12.5,15

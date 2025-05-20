@@ -4,6 +4,7 @@ charset-normalizer==3.4.2
 fpdf==1.7.2
 idna==3.10
 immutabledict==4.2.1
+joblib==1.5.0
 numpy==2.2.6
 ortools==9.12.4544
 pandas==2.2.3
@@ -13,6 +14,9 @@ python-dateutil==2.9.0.post0
 python-dotenv==1.1.0
 pytz==2025.2
 requests==2.32.3
+scikit-learn==1.6.1
+scipy==1.15.3
 six==1.17.0
+threadpoolctl==3.6.0
 tzdata==2025.2
 urllib3==2.4.0

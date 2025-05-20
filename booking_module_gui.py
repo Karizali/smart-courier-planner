@@ -9,6 +9,7 @@ from email.message import EmailMessage
 import os
 from dotenv import load_dotenv
 import requests
+import re
 
 load_dotenv()
 
@@ -19,28 +20,14 @@ def generateId(min=0,max=100):
 
 def Booking_Module_GUI():
     
+    
     api_key = os.getenv("API_KEY")
     
-    conn= psycopg2.connect(host="localhost", dbname="postgres" ,user="postgres", password="12345", port=5432)
-    cur= conn.cursor()
-    cur.execute("""CREATE TABLE IF NOT EXISTS couriers (
-        id INT PRIMARY KEY,
-        item VARCHAR(255),
-        contact_num VARCHAR(255),
-        destination_address VARCHAR(255),
-        branch_address VARCHAR(255),
-        customer_name VARCHAR(255),
-        email VARCHAR(255),
-        courier_type VARCHAR(255),
-        city VARCHAR(255),
-        courier_route VARCHAR(255),
-        courier_weight VARCHAR(255)
-        )""")
+
     
     
     
-    
-    root = tk.Tk()
+    root = tk.Toplevel()
     root.title("Order place - Smart Courier Planner")
     root.configure(bg="lightblue")
 
@@ -56,21 +43,59 @@ def Booking_Module_GUI():
     courier_type_var = tk.StringVar()
 
 
+
+    def is_valid_email(email):
+        pattern = r"^[\w\.-]+@[\w\.-]+\.\w+$"
+        return re.match(pattern, email)
+
     def validation():
-        if email_var.get():
-            messagebox.showinfo("Invalid Email", "Please Enter correct email")
+
+        
+        email = email_var.get().strip()
+        contact = contact_var.get().strip()
+        destination_address = destination_address_var.get().strip()
+        print(item_name_var.get().strip())
+        print(customer_name_var.get().strip())
+        if any(var.get().strip() == "" for var in [
+            item_name_var, 
+            customer_name_var
+        ]):
+            messagebox.showerror("Input Error", "All fields are required and must not be empty.")
             return False
-        if contact_var.get() =="" or not contact_var.get().isdigit() or len(contact_var.get()) < 2:
-            messagebox.showerror("Invalid Contact Number", "Please Enter correct Contact Number")
+
+        if not is_valid_email(email):
+            messagebox.showerror("Invalid Email", "Please enter a valid email address.")
             return False
-        if destination_address_var.get().count("block")==0 and destination_address_var.get().count("sector")==0 or len(destination_address_var.get()) < 10:
-            messagebox.showerror("Invalid Destination Address", "Please Enter Complete Destination Address with house no. , city name, area name , sector/block")
+
+        if not contact.isdigit() or len(contact) < 10:
+            messagebox.showerror("Invalid Contact Number", "Please enter a valid contact number with at least 10 digits.")
             return False
-        else:
-            messagebox.showinfo("Courier Booked", f"Courier booked for {destination_address_txt.get()}")
+    
+        if (("block" not in destination_address.lower() and "sector" not in destination_address.lower()) 
+            or len(destination_address) < 10):
+            messagebox.showerror("Invalid Destination Address", 
+                                 "Please enter a complete destination address including house no., city, area, sector or block.")
+            return False
+
+        messagebox.showinfo("Courier Booked", f"Courier booked for: {destination_address}")
+        return True
 
     def save_to_db():
-
+        conn= psycopg2.connect(host="localhost", dbname="postgres" ,user="postgres", password="12345", port=5432)
+        cur= conn.cursor()
+        cur.execute("""CREATE TABLE IF NOT EXISTS couriers (
+        id INT PRIMARY KEY,
+        item VARCHAR(255),
+        contact_num VARCHAR(255),
+        destination_address VARCHAR(255),
+        branch_address VARCHAR(255),
+        customer_name VARCHAR(255),
+        email VARCHAR(255),
+        courier_type VARCHAR(255),
+        city VARCHAR(255),
+        courier_route VARCHAR(255),
+        courier_weight VARCHAR(255)
+        )""")
         id_=generateId(1000,9999)
         
         cur.execute(f"""INSERT INTO couriers (
@@ -92,6 +117,9 @@ def Booking_Module_GUI():
         '{courier_type_var.get()}', '{city_var.get()}', '{courier_route_var.get()}', 
         '{courier_weight_var.get()}')    
         """)
+        conn.commit()
+        cur.close()
+        conn.close()
         return id_
 
     def send_invoice_email(to_email, pdf_file_path):
@@ -114,6 +142,7 @@ def Booking_Module_GUI():
         with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
             smtp.login(sender_email, sender_password)
             smtp.send_message(msg)
+        messagebox.showinfo("Success", f"Data saved and invoice send to your Email: {file_name}")
 
     def generate_invoice_pdf(invoice_id):
         data = {
@@ -141,10 +170,12 @@ def Booking_Module_GUI():
     
         file_name = f"Invoice_{invoice_id}.pdf"
         pdf.output(file_name)
-        messagebox.showinfo("Success", f"Data saved and invoice generated: {file_name}")
         return file_name
     
     def save_latitude_longitude(id):
+        conn= psycopg2.connect(host="localhost", dbname="postgres" ,user="postgres", password="12345", port=5432)
+        cur= conn.cursor()
+        
         destination_address = destination_address_var.get().split(",",1)[1]
         branch_address = branch_address_var.get().split(",",1)[1]
         
@@ -175,18 +206,21 @@ def Booking_Module_GUI():
             '{branch_address_lat}', '{branch_address_lng}'
             )    
             """)
+        conn.commit()
+        cur.close()
+        conn.close()
         
         
 
     def Submit():
-        
+        print(item_name_var.get())
         # isValidation=validation()        
         # if not isValidation:
         #     return
             
-        id=save_to_db()
+        # id=save_to_db()
         
-        save_latitude_longitude(id)
+        # save_latitude_longitude(id)
 
         
         # pdf_path=generate_invoice_pdf(id)
@@ -194,6 +228,8 @@ def Booking_Module_GUI():
         # print(f"Invoice generated: {pdf_path}")
         
         # send_invoice_email(email_var.get(), pdf_path)
+
+        
 
 
     l0 = tk.Label(root, text="Courier Details", font="arial 20 bold", bg="lightblue")
@@ -258,15 +294,30 @@ def Booking_Module_GUI():
     courier_weight_combo = ttk.Combobox(root, textvariable=courier_weight_var)
     courier_weight_combo['values'] = ("1-5 kg", "5-10 kg", "10-20 kg", "20-50 kg", "50+ kg")
     courier_weight_combo.pack(anchor='w' ,padx=10)
+    
+    # Configure comboboxes to prevent empty values
+    city_combo['state'] = 'readonly'
+    courier_route_combo['state'] = 'readonly'
+    courier_weight_combo['state'] = 'readonly'
+    # Initialize radio button variable with default value
+    courier_type_var.set("Standard") 
 
-    bt = tk.Button(root, text="Register", bg="yellow", fg="red", command=Submit)
-    bt.pack(anchor='w' ,padx=10)
+    bt = tk.Button(
+    root, 
+    text="Register", 
+    bg="#ffd700",             
+    fg="#b22222",             
+    font=("Arial", 11, "bold"),
+    width=15,
+    relief="raised",
+    bd=2,
+    command=Submit
+)
+    bt.pack( padx=10, pady=20)
 
     root.geometry('500x600')
     root.mainloop()
     
     
     
-    conn.commit()
-    cur.close()
-    conn.close()
+

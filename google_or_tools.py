@@ -2,8 +2,20 @@
 
 from ortools.constraint_solver import routing_enums_pb2
 from ortools.constraint_solver import pywrapcp
+# import psycopg2
+# conn= psycopg2.connect(host="localhost", dbname="postgres" ,user="postgres", password="12345", port=5432)
+# cur= conn.cursor()
 
+# address_string = []
+# cur.execute("""
+#     SELECT destination_address FROM couriers
+#     """)
 
+# for address in cur.fetchall():
+#     pass
+# conn.commit()
+# cur.close()
+# conn.close()
 
 def create_data_model(dis_tance_matrix):
     """Stores the data for the problem."""
@@ -20,7 +32,9 @@ def print_solution(manager, routing, solution):
     index = routing.Start(0)
     plan_output = "Route for vehicle 0:\n"
     route_distance = 0
+    solution_index=[]
     while not routing.IsEnd(index):
+        solution_index.append(manager.IndexToNode(index))
         plan_output += f" {manager.IndexToNode(index)} ->"
         previous_index = index
         index = solution.Value(routing.NextVar(index))
@@ -28,6 +42,7 @@ def print_solution(manager, routing, solution):
     plan_output += f" {manager.IndexToNode(index)}\n"
     plan_output += f"Route distance: {route_distance}miles\n"
     print(plan_output)
+    return solution_index
 
 
 def google_OR_tools(distance_matrix):
@@ -67,4 +82,5 @@ def google_OR_tools(distance_matrix):
 
     # Print solution on console.
     if solution:
-        print_solution(manager, routing, solution)
+        sol=print_solution(manager, routing, solution)
+        return sol

@@ -33,14 +33,17 @@ def find_best_route():
     cur= conn.cursor()
     
     cur.execute("""
-        SELECT des_lat,des_lng FROM lat_lng
+        SELECT des_lat,des_lng,id FROM lat_lng
         """)
     
     distance_from_each_courier = []
+    id_to_print_result=[]
     for courier_coordinates in cur.fetchall():
         cur.execute("""
-            SELECT des_lat,des_lng FROM lat_lng
+            SELECT des_lat,des_lng,id FROM lat_lng
             """)
+        id_to_print_result.append(courier_coordinates[2])
+        print("ID      dfsdf s ",courier_coordinates[2])
         distance=[]
         for others_courier_coordinates in cur.fetchall():
             d=get_distance_from_lat_lon_in_km(courier_coordinates[0], 
@@ -48,24 +51,15 @@ def find_best_route():
                                             others_courier_coordinates[0], 
                                             others_courier_coordinates[1])
             distance.append(int(d))
+            
         distance_from_each_courier.append(distance)
-    print(distance_from_each_courier)
-    google_OR_tools(distance_from_each_courier)
-        
-
-
-     
-
-
-
-
-        
-        
     conn.commit()
     cur.close()
     conn.close()
-# a=[
-#    {"de":(0,1),"br":(0,1)},
-#    {"de":(2,3),"br":(9,1)},
-#    ]
-find_best_route()
+    # print(distance_from_each_courier)
+    sol=google_OR_tools(distance_from_each_courier)
+    print(sol)
+    return (sol,id_to_print_result)
+        
+
+

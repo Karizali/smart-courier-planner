@@ -56,6 +56,7 @@ def Booking_Module_GUI():
         destination_address = destination_address_var.get().strip()
         print(item_name_var.get().strip())
         print(customer_name_var.get().strip())
+        
         if any(var.get().strip() == "" for var in [
             item_name_var, 
             customer_name_var
@@ -214,20 +215,20 @@ def Booking_Module_GUI():
 
     def Submit():
         print(item_name_var.get())
-        # isValidation=validation()        
-        # if not isValidation:
-        #     return
+        isValidation=validation()        
+        if not isValidation:
+            return
             
-        # id=save_to_db()
+        id=save_to_db()
         
-        # save_latitude_longitude(id)
+        save_latitude_longitude(id)
 
         
-        # pdf_path=generate_invoice_pdf(id)
+        pdf_path=generate_invoice_pdf(id)
         
-        # print(f"Invoice generated: {pdf_path}")
+        print(f"Invoice generated: {pdf_path}")
         
-        # send_invoice_email(email_var.get(), pdf_path)
+        send_invoice_email(email_var.get(), pdf_path)
 
         
 
@@ -300,7 +301,10 @@ def Booking_Module_GUI():
     courier_route_combo['state'] = 'readonly'
     courier_weight_combo['state'] = 'readonly'
     # Initialize radio button variable with default value
-    courier_type_var.set("Standard") 
+    courier_route_combo.set("Standard") 
+    courier_type_var.set("City to City") 
+    city_combo.set("Karachi") 
+    courier_weight_combo.set("1-5 kg") 
 
     bt = tk.Button(
     root, 

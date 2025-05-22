@@ -23,10 +23,6 @@ def Booking_Module_GUI():
     
     api_key = os.getenv("API_KEY")
     
-
-    
-    
-    
     root = tk.Toplevel()
     root.title("Order place - Smart Courier Planner")
     root.configure(bg="lightblue")
@@ -214,23 +210,30 @@ def Booking_Module_GUI():
         
 
     def Submit():
-        print(item_name_var.get())
         isValidation=validation()        
         if not isValidation:
             return
-            
-        id=save_to_db()
-        
-        save_latitude_longitude(id)
-
-        
-        pdf_path=generate_invoice_pdf(id)
-        
-        print(f"Invoice generated: {pdf_path}")
-        
-        send_invoice_email(email_var.get(), pdf_path)
-
-        
+        try:
+            id=save_to_db()
+        except Exception as e:
+            messagebox.showerror("Database Error", f"Error saving to database: {str(e)}")
+            return
+        try:
+            save_latitude_longitude(id)
+        except Exception as e:
+            messagebox.showerror("Database Error", f"Error saving latitude and longitude: {str(e)}")
+            return
+        try:
+            pdf_path=generate_invoice_pdf(id)
+        except Exception as e:
+            messagebox.showerror("PDF Generation Error", f"Error generating PDF: {str(e)}")
+            print(f"Invoice generated: {pdf_path}")
+            return
+        try:
+            send_invoice_email(email_var.get(), pdf_path)
+        except Exception as e:
+            messagebox.showerror("Email Sending Error", f"Error sending email: {str(e)}")
+            return
 
 
     l0 = tk.Label(root, text="Courier Details", font="arial 20 bold", bg="lightblue")
@@ -321,7 +324,3 @@ def Booking_Module_GUI():
 
     root.geometry('500x600')
     root.mainloop()
-    
-    
-    
-
